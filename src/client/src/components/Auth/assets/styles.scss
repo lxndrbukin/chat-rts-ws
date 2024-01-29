@@ -1,0 +1,105 @@
+@import '../../assets/variables.scss';
+
+.auth-container {
+  min-height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .auth {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-grey;
+    border-radius: $border-r7;
+    border: 1px solid $light-blue;
+    padding: 20px 15px;
+
+    .auth-form-container {
+      .auth-form-third-party {
+        width: fit-content;
+        display: grid;
+        grid-auto-rows: 50px;
+      }
+
+      .auth-form {
+        display: grid;
+        grid-auto-rows: 50px;
+
+        .auth-form-input {
+          width: 100%;
+          max-width: 330px;
+          height: 43px;
+          padding: 10px 14px 10px 40px;
+          font-size: 17px;
+          box-sizing: border-box;
+          align-self: center;
+          border-radius: $border-r7;
+          border: 1px solid $grey;
+        }
+      }
+    }
+
+    .auth-form-btn {
+      width: 330px;
+      height: 43px;
+      align-self: center;
+      cursor: pointer;
+      font-size: 17px;
+      border-radius: $border-r7;
+      border: 1px solid $dark-blue;
+      background-color: $blue;
+      color: $white;
+    }
+
+    .google {
+      background-color: $white;
+      border: 1px solid $grey;
+      color: $dark;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .discord {
+      background-color: $purple;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-img {
+      height: 20px;
+    }
+
+    .auth-form-separator {
+      width: 100%;
+      max-width: 330px;
+      position: relative;
+      display: grid;
+      padding: 7px 0;
+
+      .auth-form-separator-line {
+        position: absolute;
+        top: 50%;
+        display: block;
+        left: 0;
+        width: 100%;
+        border: 1px solid $grey;
+      }
+
+      .auth-form-separator-text {
+        justify-self: center;
+        align-self: center;
+        z-index: 1;
+        padding: 0 25px;
+        background-color: $light-grey;
+      }
+    }
+  }
+}
