@@ -11,4 +11,5 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export * from './thunks/signup';
+export * from './thunks/login';
 export * from './slices/sessionSlice';

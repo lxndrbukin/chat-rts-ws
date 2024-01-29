@@ -1,14 +1,16 @@
 import mongoose, { Schema } from 'mongoose';
+import { User, Schemas } from './types';
 
-const UserSchema: Schema = new Schema({
+const UserSchema: Schema = new Schema<User>({
   userId: Number,
   avatar: {
     type: String,
     default:
       'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg',
   },
+  email: { type: String, required: true },
   username: { type: String, required: true },
   password: { type: String, required: true },
 });
 
-export default mongoose.model('user', UserSchema);
+export default mongoose.model<User>(Schemas.User, UserSchema);

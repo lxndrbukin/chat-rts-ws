@@ -1,20 +1,29 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import WebSocket, { WebSocketServer } from 'ws';
 import mongoose from 'mongoose';
+import cookieSession from 'cookie-session';
 import { keys } from './services/keys';
+
 import authRoutes from './routes/auth';
+import rootRoutes from './routes/root';
+import userRoutes from './routes/users';
+
+import './models/User';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const wss = new WebSocketServer({ port: 5001 });
-
-app.get('/', (req: Request, res: Response): void => {
-  res.send('Hello');
-});
+app.use(
+  cookieSession({
+    keys: ['123safa'],
+  })
+);
 
 authRoutes(app);
+rootRoutes(app);
+userRoutes(app);
 
+const wss = new WebSocketServer({ port: 5001 });
 wss.on('connection', (ws: WebSocket): void => {
   ws.on('message', (data: string) => {
     const msg = JSON.parse(data);
