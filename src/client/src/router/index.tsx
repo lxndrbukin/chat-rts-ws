@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from '../components/App';
+import { Auth } from '../components/Auth/reusable/Auth';
 import { AuthLogin } from '../components/Auth/AuthLogin';
 import { AuthSignup } from '../components/Auth/AuthSignup';
 
@@ -10,11 +11,19 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'login',
-        element: <AuthLogin />,
+        element: (
+          <Auth header="Welcome Back!">
+            <AuthLogin />
+          </Auth>
+        ),
       },
       {
         path: 'signup',
-        element: <AuthSignup />,
+        element: (
+          <Auth header="Welcome!">
+            <AuthSignup />
+          </Auth>
+        ),
       },
     ],
   },

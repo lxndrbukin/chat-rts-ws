@@ -10,6 +10,9 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
+export * from './thunks/types';
 export * from './thunks/signup';
 export * from './thunks/login';
+export * from './thunks/getCurrentUser';
+export * from './slices/types';
 export * from './slices/sessionSlice';
