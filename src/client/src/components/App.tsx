@@ -1,23 +1,23 @@
 import './assets/styles.scss';
 import { FC } from 'react';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, getCurrentUser } from '../store';
 import { Header } from './Header/Header';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
 
 export const App: FC = (): JSX.Element => {
-  const socket = new WebSocket('ws://localhost:5001/');
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    socket.addEventListener('open', () => {
-      socket.send(JSON.stringify({ message: 'Message' }));
-    });
-  }, [socket]);
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
-    <div className='app'>
+    <div className="app">
       <Header />
-      <div className='body'>
+      <div className="body">
         <Sidebar />
         <Outlet />
       </div>

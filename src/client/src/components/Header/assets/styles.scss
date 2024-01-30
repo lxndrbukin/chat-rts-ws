@@ -10,6 +10,8 @@
   .header {
     width: 100%;
     max-width: $max-width;
+    display: flex;
+    justify-content: space-between;
 
     .header-logo {
       font-weight: bold;

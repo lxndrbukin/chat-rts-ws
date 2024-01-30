@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
 export type AuthProps = {
-  header: string;
+  authType: string;
   children: ReactNode;
 };

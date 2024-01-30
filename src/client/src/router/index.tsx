@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         element: (
-          <Auth header="Welcome Back!">
+          <Auth authType="login">
             <AuthLogin />
           </Auth>
         ),
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       {
         path: 'signup',
         element: (
-          <Auth header="Welcome!">
+          <Auth authType="signup">
             <AuthSignup />
           </Auth>
         ),

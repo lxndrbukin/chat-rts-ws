@@ -6,7 +6,7 @@ import { AppDispatch, signup } from '../../store';
 export const AuthSignup: FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const authUser = (e: FormEvent<HTMLFormElement>) => {
+  const signupUser = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       email: { value: string };
@@ -22,27 +22,25 @@ export const AuthSignup: FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="auth-form-container">
-        <div className="auth-form-separator">
-          <span className="auth-form-separator-text">OR</span>
-          <div className="auth-form-separator-line"></div>
-        </div>
-        <form onSubmit={authUser} className="auth-form">
-          <input
-            type="email"
-            className="auth-form-input"
-            placeholder="Email"
-            name="email"
-          />
-          <input
-            type="password"
-            className="auth-form-input"
-            placeholder="Password"
-            name="password"
-          />
-          <button className="auth-form-btn">Sign Up</button>
-        </form>
+      <div className="auth-form-separator">
+        <span className="auth-form-separator-text">OR</span>
+        <div className="auth-form-separator-line"></div>
       </div>
+      <form onSubmit={signupUser} className="auth-form">
+        <input
+          type="email"
+          className="auth-form-input"
+          placeholder="Email"
+          name="email"
+        />
+        <input
+          type="password"
+          className="auth-form-input"
+          placeholder="Password"
+          name="password"
+        />
+        <button className="auth-form-btn">Sign Up</button>
+      </form>
     </>
   );
 };
