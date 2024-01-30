@@ -1,3 +1,4 @@
+import './assets/styles.scss';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { SidebarLink } from './types';
@@ -20,9 +21,9 @@ export const Sidebar: FC = (): JSX.Element => {
             ? `${link.path}/${userData.userId}`
             : link.path;
         return (
-          <li title={link.name} className='sidebar-link' key={link.name}>
+          <li title={link.name} className="sidebar-link" key={link.name}>
             <Link to={path}>
-              {link.icon} <span className='sidebar-link-name'>{link.name}</span>
+              {link.icon} <span className="sidebar-link-name">{link.name}</span>
             </Link>
           </li>
         );
@@ -32,9 +33,9 @@ export const Sidebar: FC = (): JSX.Element => {
   };
 
   return (
-    <div className='sidebar'>
-      <nav className='sidebar-links'>
-        <ul className='sidebar-links-list'>{renderLinks(mainLinks)}</ul>
+    <div className="sidebar">
+      <nav className="sidebar-links">
+        <ul className="sidebar-links-list">{renderLinks(mainLinks)}</ul>
       </nav>
     </div>
   );

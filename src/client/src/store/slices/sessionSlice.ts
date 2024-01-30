@@ -11,7 +11,6 @@ const initialState: Session = {
 };
 
 const isError = (payload: any): payload is ErrorMessage => payload.message;
-const isNull = (payload: any): payload is null => payload;
 
 const sessionSlice = createSlice({
   name: Slices.Session,
@@ -43,7 +42,7 @@ const sessionSlice = createSlice({
     builder.addCase(
       getCurrentUser.fulfilled,
       (state: Session, action: PayloadAction<UserData | null>) => {
-        if (isNull(action.payload)) {
+        if (!action.payload) {
           state.userData = undefined;
           state.isLoggedIn = false;
         } else {

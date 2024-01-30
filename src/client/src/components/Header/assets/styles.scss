@@ -2,16 +2,18 @@
 
 .header-container {
   background-color: $light-grey;
-  display: grid;
+  display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid $light-blue;
+  width: 100%;
 
   .header {
     width: 100%;
     max-width: $max-width;
     display: flex;
     justify-content: space-between;
+    height: 100%;
 
     .header-logo {
       font-weight: bold;

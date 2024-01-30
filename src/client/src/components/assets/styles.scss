@@ -9,4 +9,17 @@ body {
 .app {
   display: grid;
   grid-template-rows: 50px 1fr;
+
+  .body-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      max-width: $max-width;
+      width: 100%;
+    }
+  }
 }

@@ -17,9 +17,11 @@ export const App: FC = (): JSX.Element => {
   return (
     <div className="app">
       <Header />
-      <div className="body">
-        <Sidebar />
-        <Outlet />
+      <div className="body-container">
+        <div className="body">
+          <Sidebar />
+          <Outlet />
+        </div>
       </div>
     </div>
   );

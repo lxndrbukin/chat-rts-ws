@@ -1,0 +1,76 @@
+@import '../../assets/variables.scss';
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: $spacing-lg;
+
+  .sidebar-logo {
+    display: flex;
+    justify-content: center;
+    padding: $spacing-lg;
+
+    a {
+      color: $dark;
+    }
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+
+    .sidebar-links-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      font-size: 15px;
+      width: 100%;
+
+      .sidebar-link {
+        padding-right: $spacing-md;
+        cursor: pointer;
+        display: flex;
+
+        a {
+          color: $dark;
+          display: grid;
+          grid-template-columns: 24px 1fr;
+          grid-gap: 10px;
+          text-decoration: none;
+          align-self: center;
+          width: 100%;
+          padding: 0 $spacing-md;
+          border-radius: 5px;
+          height: 35px;
+
+          &:hover {
+            background-color: $light-blue;
+          }
+
+          .sidebar-link-name {
+            align-self: center;
+          }
+
+          svg {
+            color: $dark-blue;
+            align-self: center;
+            justify-self: center;
+          }
+        }
+      }
+    }
+  }
+
+  .siderbar-separator {
+    height: 2px;
+    border: none;
+    width: 70%;
+    background-color: $light-blue;
+  }
+
+  .additional {
+    height: fit-content;
+  }
+}
