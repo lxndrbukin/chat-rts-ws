@@ -23,24 +23,24 @@ export const AuthLogin: FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="auth-form-separator">
-        <span className="auth-form-separator-text">OR</span>
-        <div className="auth-form-separator-line"></div>
+      <div className='auth-form-separator'>
+        <span className='auth-form-separator-text'>OR</span>
+        <div className='auth-form-separator-line'></div>
       </div>
-      <form onSubmit={loginUser} className="auth-form">
+      <form onSubmit={loginUser} className='form'>
         <input
-          type="email"
-          className="auth-form-input"
-          placeholder="Email"
-          name="email"
+          type='email'
+          className='form-input'
+          placeholder='Email'
+          name='email'
         />
         <input
-          type="password"
-          className="auth-form-input"
-          placeholder="Password"
-          name="password"
+          type='password'
+          className='form-input'
+          placeholder='Password'
+          name='password'
         />
-        <button className="auth-form-btn">Login</button>
+        <button className='form-btn'>Login</button>
       </form>
     </>
   );

@@ -5,11 +5,27 @@ import { SidebarLink } from './types';
 import { Link } from 'react-router-dom';
 import { mainLinks, additionalLinks } from './assets/links';
 import { RootState, Session } from '../../store';
+import { IoMdChatbubbles } from 'react-icons/io';
 
 export const Sidebar: FC = (): JSX.Element => {
   const { userData, isLoggedIn } = useSelector(
     (state: RootState): Session => state.session
   );
+
+  const renderSidebarProfile = () => {
+    if (userData) {
+      return (
+        <div className='sidebar-profile'>
+          <img
+            title={userData.username}
+            className='sidebar-profile-avatar'
+            alt={userData.username}
+            src={userData.avatar}
+          />
+        </div>
+      );
+    }
+  };
 
   const renderLinks = (
     links: Array<SidebarLink>
@@ -21,10 +37,8 @@ export const Sidebar: FC = (): JSX.Element => {
             ? `${link.path}/${userData.userId}`
             : link.path;
         return (
-          <li title={link.name} className="sidebar-link" key={link.name}>
-            <Link to={path}>
-              {link.icon} <span className="sidebar-link-name">{link.name}</span>
-            </Link>
+          <li title={link.name} className='sidebar-link' key={link.name}>
+            <Link to={path}>{link.icon}</Link>
           </li>
         );
       }
@@ -33,10 +47,19 @@ export const Sidebar: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="sidebar">
-      <nav className="sidebar-links">
-        <ul className="sidebar-links-list">{renderLinks(mainLinks)}</ul>
+    <div className='sidebar'>
+      <div title='ChatRoom' className='sidebar-logo'>
+        <Link to='/'>
+          <IoMdChatbubbles size={38} />
+        </Link>
+      </div>
+      <nav className='sidebar-links'>
+        <ul className='sidebar-links-list'>{renderLinks(mainLinks)}</ul>
+        <ul className='sidebar-links-list additional'>
+          {renderLinks(additionalLinks)}
+        </ul>
       </nav>
+      <div className='sidebar-profile-container'>{renderSidebarProfile()}</div>
     </div>
   );
 };

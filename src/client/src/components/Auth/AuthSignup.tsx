@@ -22,24 +22,24 @@ export const AuthSignup: FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="auth-form-separator">
-        <span className="auth-form-separator-text">OR</span>
-        <div className="auth-form-separator-line"></div>
+      <div className='auth-form-separator'>
+        <span className='auth-form-separator-text'>OR</span>
+        <div className='auth-form-separator-line'></div>
       </div>
-      <form onSubmit={signupUser} className="auth-form">
+      <form onSubmit={signupUser} className='form'>
         <input
-          type="email"
-          className="auth-form-input"
-          placeholder="Email"
-          name="email"
+          type='email'
+          className='form-input'
+          placeholder='Email'
+          name='email'
         />
         <input
-          type="password"
-          className="auth-form-input"
-          placeholder="Password"
-          name="password"
+          type='password'
+          className='form-input'
+          placeholder='Password'
+          name='password'
         />
-        <button className="auth-form-btn">Sign Up</button>
+        <button className='form-btn'>Sign Up</button>
       </form>
     </>
   );

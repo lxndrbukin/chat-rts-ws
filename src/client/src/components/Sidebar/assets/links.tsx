@@ -1,14 +1,20 @@
 import { SidebarLink } from '../types';
-import { FaBell, FaUsers, FaUser } from 'react-icons/fa';
-import { BiSolidMessage } from 'react-icons/bi';
+import { FaBell, FaUsers } from 'react-icons/fa';
+import { MdChatBubble } from 'react-icons/md';
 import { RiSettings3Fill, RiLoginBoxLine } from 'react-icons/ri';
-import { IoMdPhotos } from 'react-icons/io';
+import { BiSolidDashboard } from 'react-icons/bi';
 
 export const mainLinks: Array<SidebarLink> = [
   {
-    name: 'My Profile',
-    icon: <FaUser size={20} />,
-    path: '/profile',
+    name: 'Rooms',
+    icon: <BiSolidDashboard size={24} />,
+    path: '/rooms',
+    ifLoggedIn: true,
+  },
+  {
+    name: 'Messages',
+    icon: <MdChatBubble size={24} />,
+    path: '/IM',
     ifLoggedIn: true,
   },
   {
@@ -21,18 +27,6 @@ export const mainLinks: Array<SidebarLink> = [
     name: 'Notifications',
     icon: <FaBell size={24} />,
     path: '/notifications',
-    ifLoggedIn: true,
-  },
-  {
-    name: 'Messages',
-    icon: <BiSolidMessage size={24} />,
-    path: '/IM',
-    ifLoggedIn: true,
-  },
-  {
-    name: 'Photos',
-    icon: <IoMdPhotos size={24} />,
-    path: '/photos',
     ifLoggedIn: true,
   },
   {

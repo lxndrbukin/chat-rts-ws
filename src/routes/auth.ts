@@ -14,7 +14,7 @@ export default (app: Express): void => {
       username: 'User' + userId,
       password: await createPassword(password)
     });
-    req.session = { userId, email, username: user.username };
+    req.session = { userId, email, username: user.username, avatar: user.avatar };
     res.send(req.session);
   });
 
@@ -25,7 +25,7 @@ export default (app: Express): void => {
     const passwordCheck = await comparePasswords(user.password, password);
     if (user && !passwordCheck) return res.status(403).json({ message: 'Incorrect password' });
     const { userId, username } = user;
-    req.session = { userId, email, username };
+    req.session = { userId, email, username, avatar: user.avatar };
     res.send(req.session);
   });
 

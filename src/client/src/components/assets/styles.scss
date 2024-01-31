@@ -7,19 +7,40 @@ body {
 }
 
 .app {
+  height: 100vh;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-columns: 70px 1fr;
 
-  .body-container {
-    display: flex;
-    justify-content: center;
+  .body {
     width: 100%;
-
-    .body {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      max-width: $max-width;
-      width: 100%;
-    }
   }
+}
+
+.form {
+  display: grid;
+  grid-auto-rows: 50px;
+
+  .form-input {
+    width: 100%;
+    max-width: 330px;
+    height: 43px;
+    padding: 10px 14px 10px 40px;
+    font-size: 17px;
+    box-sizing: border-box;
+    align-self: center;
+    border-radius: $border-r7;
+    border: 1px solid $grey;
+  }
+}
+
+.form-btn {
+  width: 330px;
+  height: 43px;
+  align-self: center;
+  cursor: pointer;
+  font-size: 17px;
+  border-radius: $border-r7;
+  border: 1px solid $dark-blue;
+  background-color: $blue;
+  color: $white;
 }
