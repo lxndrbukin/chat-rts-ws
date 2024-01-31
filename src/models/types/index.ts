@@ -8,7 +8,29 @@ type UserSchema = {
 
 export type User = UserSchema & Document;
 
-export enum Schemas {
+export type RoomMember = {
+  userId: number;
+};
+
+export type RoomMessage = {
+  type: string;
+  sentAt: Date;
+  userId?: number;
+  text: string;
+};
+
+type RoomSchema = {
+  roomId: number;
+  roomName: string;
+  password?: string;
+  members: Array<RoomMember>;
+  messages: Array<RoomMessage>;
+};
+
+export type Room = RoomSchema & Document;
+
+export enum Models {
   User = 'user',
-  Chat = 'chat'
+  Chat = 'chat',
+  Room = 'room',
 }

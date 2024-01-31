@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { User, Schemas } from './types';
+import { User, Models } from './types';
 
 const UserSchema: Schema = new Schema<User>({
   userId: Number,
@@ -13,4 +13,4 @@ const UserSchema: Schema = new Schema<User>({
   password: { type: String, required: true },
 });
 
-export default mongoose.model<User>(Schemas.User, UserSchema);
+export default mongoose.model<User>(Models.User, UserSchema);

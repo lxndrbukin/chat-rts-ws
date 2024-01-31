@@ -10,6 +10,7 @@ import userRoutes from './routes/users';
 import wSocket from './socket';
 
 import './models/User';
+import './models/Room';
 
 const wss = new WebSocketServer({ port: 5001 });
 const app = express();

@@ -1,0 +1,24 @@
+@import '../../assets/variables.scss';
+
+.rooms {
+}
+
+.rooms-create {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .rooms-create-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-grey;
+    border-radius: $border-r7;
+    border: 1px solid $light-blue;
+    padding: 20px 15px;
+  }
+}
