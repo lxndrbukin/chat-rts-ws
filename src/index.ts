@@ -7,6 +7,7 @@ import { keys } from './services/keys';
 import authRoutes from './routes/auth';
 import rootRoutes from './routes/root';
 import userRoutes from './routes/users';
+import roomRoutes from './routes/rooms';
 import wSocket from './socket';
 
 import './models/User';
@@ -25,6 +26,7 @@ app.use(
 authRoutes(app);
 rootRoutes(app);
 userRoutes(app);
+roomRoutes(app);
 
 wSocket(wss);
 

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sessionSlice from './slices/sessionSlice';
+import roomsSlice from './slices/roomsSlice';
 
 export const store = configureStore({
   reducer: {
     session: sessionSlice,
+    rooms: roomsSlice,
   },
 });
 

@@ -32,9 +32,10 @@ export type Room = {
   roomName: string;
   members?: Array<UserData>;
   messages?: Array<RoomMessage>;
+  password?: string;
 };
 
 export type Rooms = {
-  rooms: Array<Room>;
+  roomsList: Array<Room>;
   currentRoom: Room | undefined;
 };

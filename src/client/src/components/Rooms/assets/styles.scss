@@ -1,6 +1,21 @@
 @import '../../assets/variables.scss';
 
-.rooms {
+.rooms-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  .rooms-item {
+    display: flex;
+    width: 350px;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    align-self: center;
+    background-color: $light-grey;
+    border-radius: $border-r7;
+    border: 1px solid $light-blue;
+    padding: 20px 15px;
+  }
 }
 
 .rooms-create {

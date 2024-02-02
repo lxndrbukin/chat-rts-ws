@@ -3,7 +3,7 @@ import { Slices, Rooms, Room } from './types';
 import { getRooms } from '../thunks/getRooms';
 
 const initialState: Rooms = {
-  rooms: [],
+  roomsList: [],
   currentRoom: undefined,
 };
 
@@ -15,7 +15,7 @@ const roomsSlice = createSlice({
     builder.addCase(
       getRooms.fulfilled,
       (state: Rooms, action: PayloadAction<Array<Room>>) => {
-        state.rooms = action.payload;
+        state.roomsList = action.payload;
       }
     );
   },
