@@ -5,6 +5,7 @@ import { AuthLogin } from '../components/Auth/AuthLogin';
 import { AuthSignup } from '../components/Auth/AuthSignup';
 import { CreateRoom } from '../components/Rooms/CreateRoom';
 import { RoomsList } from '../components/Rooms/RoomsList';
+import { Room } from '../components/Rooms/Room';
 
 export const router = createBrowserRouter([
   {
@@ -28,14 +29,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'rooms',
+        path: '/rooms',
         element: <RoomsList />,
-        children: [
-          {
-            path: 'create',
-            element: <CreateRoom />,
-          },
-        ],
+      },
+      {
+        path: '/rooms/create',
+        element: <CreateRoom />,
+      },
+      {
+        path: '/rooms/:roomId',
+        element: <Room />,
       },
     ],
   },

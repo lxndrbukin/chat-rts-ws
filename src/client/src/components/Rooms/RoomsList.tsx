@@ -14,9 +14,16 @@ export const RoomsList: FC = (): JSX.Element => {
   }, [dispatch]);
 
   const renderRoomsList = roomsList.map((room) => {
-    const { roomName, password } = room;
-    return <RoomsListItem roomName={roomName} password={password} />;
+    const { roomName, roomId, password } = room;
+    return (
+      <RoomsListItem roomId={roomId} roomName={roomName} password={password} />
+    );
   });
 
-  return <div className="rooms-list">{renderRoomsList}</div>;
+  return (
+    <div className="rooms-list-container">
+      <h1 className="rooms-list-header">Available Rooms</h1>
+      <div className="rooms-list">{renderRoomsList}</div>
+    </div>
+  );
 };

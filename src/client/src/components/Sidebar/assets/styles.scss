@@ -5,16 +5,21 @@
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
-  padding-top: $spacing-lg;
+  padding: $spacing-lg 0;
   background-color: $dark;
 
   .sidebar-logo {
     display: flex;
     justify-content: center;
-    padding: $spacing-lg;
+    padding: $spacing-md;
+    background-color: $purple;
+    border-radius: $border-r10;
+    width: 40px;
+    height: 40px;
+    align-self: center;
 
     a {
-      color: $purple;
+      color: $white;
     }
   }
 
@@ -52,7 +57,6 @@
         cursor: pointer;
         display: flex;
         justify-content: center;
-
 
         a {
           color: $dark;

@@ -20,6 +20,13 @@ export type Session = {
   message: string | undefined;
 };
 
+export type RoomItem = {
+  roomId: number;
+  roomName: string;
+  members: number;
+  protected?: boolean;
+};
+
 export type RoomMessage = {
   type: string;
   sentAt: Date;

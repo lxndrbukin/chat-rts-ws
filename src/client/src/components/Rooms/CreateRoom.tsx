@@ -1,12 +1,14 @@
 import './assets/styles.scss';
 import { FC, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, createRoom } from '../../store';
 
 export const CreateRoom: FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
-  const createNewRoom = (e: FormEvent<HTMLFormElement>): void => {
+  const createNewRoom = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       roomName: { value: string };
@@ -18,6 +20,7 @@ export const CreateRoom: FC = (): JSX.Element => {
       password: password.value,
     };
     dispatch(createRoom(room));
+    navigate('/rooms');
   };
 
   return (

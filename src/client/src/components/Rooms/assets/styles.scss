@@ -1,20 +1,86 @@
 @import '../../assets/variables.scss';
 
-.rooms-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.rooms-list-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+  align-items: center;
+  justify-content: center;
 
-  .rooms-item {
-    display: flex;
-    width: 350px;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    align-self: center;
-    background-color: $light-grey;
-    border-radius: $border-r7;
-    border: 1px solid $light-blue;
-    padding: 20px 15px;
+  .rooms-list.header {
+  }
+  .rooms-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 20px;
+
+    .rooms-item {
+      display: grid;
+      grid-template-rows: 150px 1fr;
+      width: 350px;
+      justify-content: center;
+      justify-self: center;
+      align-items: center;
+      align-self: center;
+      background-color: $dark;
+      border-radius: $border-r7;
+      color: $grey;
+      text-decoration: none;
+
+      .rooms-item-cover {
+        height: 150px;
+        width: 100%;
+        background-color: $dark-grey;
+        border-top-left-radius: $border-r7;
+        border-top-right-radius: $border-r7;
+      }
+
+      .rooms-item-info {
+        padding: 0 15px 15px 15px;
+        margin-top: -30px;
+
+        .rooms-item-icon {
+          width: 50px;
+          height: 50px;
+          padding: 4px;
+          background-color: $dark;
+          border-radius: 50%;
+        }
+
+        .rooms-item-descr {
+          font-size: 0.9rem;
+        }
+
+        .rooms-item-members {
+          display: flex;
+
+          .rooms-item-members-status {
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+              margin: 0 10px 0px 5px;
+            }
+
+            .status {
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+            }
+
+            .total {
+              background-color: $grey;
+            }
+
+            .online {
+              background-color: $status-green;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
