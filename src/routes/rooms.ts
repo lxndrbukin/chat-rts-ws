@@ -12,7 +12,7 @@ export default (app: Express): void => {
         roomId,
         roomName,
         members: members.length,
-        protected: password ? true : undefined,
+        pwProtected: password ? true : undefined,
       };
       return roomData;
     });

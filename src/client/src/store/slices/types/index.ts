@@ -24,7 +24,7 @@ export type RoomItem = {
   roomId: number;
   roomName: string;
   members: number;
-  protected?: boolean;
+  pwProtected?: boolean;
 };
 
 export type RoomMessage = {
@@ -43,6 +43,6 @@ export type Room = {
 };
 
 export type Rooms = {
-  roomsList: Array<Room>;
+  roomsList: Array<RoomItem>;
   currentRoom: Room | undefined;
 };

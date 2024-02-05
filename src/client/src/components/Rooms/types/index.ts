@@ -1,7 +1,8 @@
 export type RoomsListItemProps = {
   roomName: string;
   roomId: number;
-  password?: string;
+  members: number;
+  pwProtected?: boolean;
 };
 
 export type RoomProps = {

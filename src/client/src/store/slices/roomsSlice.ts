@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Slices, Rooms, Room } from './types';
+import { Slices, Rooms, RoomItem, Room } from './types';
 import { createRoom } from '../thunks/createRoom';
 import { getRooms } from '../thunks/getRooms';
 import { getCurrentRoom } from '../thunks/getCurrentRoom';
@@ -16,13 +16,13 @@ const roomsSlice = createSlice({
   extraReducers: (builder): void => {
     builder.addCase(
       createRoom.fulfilled,
-      (state: Rooms, action: PayloadAction<Room>) => {
+      (state: Rooms, action: PayloadAction<RoomItem>) => {
         state.roomsList = [...state.roomsList, action.payload];
       }
     );
     builder.addCase(
       getRooms.fulfilled,
-      (state: Rooms, action: PayloadAction<Array<Room>>) => {
+      (state: Rooms, action: PayloadAction<Array<RoomItem>>) => {
         state.roomsList = action.payload;
       }
     );
