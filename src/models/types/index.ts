@@ -22,7 +22,7 @@ export type RoomMessage = {
 type RoomSchema = {
   roomId: number;
   roomName: string;
-  password?: string;
+  password: string;
   members: Array<RoomMember>;
   messages: Array<RoomMessage>;
 };

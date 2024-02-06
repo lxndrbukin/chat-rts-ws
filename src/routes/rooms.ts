@@ -1,5 +1,5 @@
 import { Express, Request, Response } from 'express';
-import { createPassword } from './helpers/passwordHelpers';
+import { createPassword, comparePasswords } from './helpers/passwordHelpers';
 import Room from '../models/Room';
 import User from '../models/User';
 
@@ -56,4 +56,15 @@ export default (app: Express): void => {
       res.send(room);
     }
   );
+
+  app.post('/_api/rooms/:roomId/auth', async (req: Request, res: Response) => {
+    const { roomId, password } = req.body;
+    const room = await Room.findOne({ roomId }).select('-_id -__v');
+    if (room) {
+      if (room.password && (await comparePasswords(room.password, password))) {
+        return res.send(room);
+      }
+    }
+    return res.status(403).json({ message: 'Incorrect password' });
+  });
 };

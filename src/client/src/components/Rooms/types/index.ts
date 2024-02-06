@@ -1,8 +1,11 @@
+import { MouseEventHandler } from 'react';
+
 export type RoomsListItemProps = {
   roomName: string;
   roomId: number;
   members: number;
   pwProtected?: boolean;
+  toggleModal: Function;
 };
 
 export type RoomProps = {
@@ -12,4 +15,5 @@ export type RoomProps = {
 
 export type RoomAuthModalProps = {
   isOpen: boolean;
+  toggleModal: Function;
 };

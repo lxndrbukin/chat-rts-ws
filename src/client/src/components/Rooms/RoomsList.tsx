@@ -17,6 +17,10 @@ export const RoomsList: FC = (): JSX.Element => {
     dispatch(getRooms());
   }, [dispatch]);
 
+  const toggleModal = (bool: boolean): void => {
+    setIsOpen(bool);
+  };
+
   const renderRoomsList = roomsList.map((room) => {
     const { roomName, roomId, pwProtected, members } = room;
     return (
@@ -25,16 +29,17 @@ export const RoomsList: FC = (): JSX.Element => {
         roomId={roomId}
         roomName={roomName}
         pwProtected={pwProtected}
+        toggleModal={() => toggleModal(true)}
       />
     );
   });
 
   return (
-    <div className='rooms-list-container'>
+    <div className="rooms-list-container">
       <SearchRooms />
-      <h1 className='rooms-list-header'>Available Rooms</h1>
-      <div className='rooms-list'>{renderRoomsList}</div>
-      <RoomAuthModal isOpen={isOpen} />
+      <h1 className="rooms-list-header">Available Rooms</h1>
+      <div className="rooms-list">{renderRoomsList}</div>
+      <RoomAuthModal toggleModal={() => toggleModal(false)} isOpen={isOpen} />
     </div>
   );
 };

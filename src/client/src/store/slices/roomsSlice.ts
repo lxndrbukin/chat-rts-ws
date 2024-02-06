@@ -12,7 +12,12 @@ const initialState: Rooms = {
 const roomsSlice = createSlice({
   name: Slices.Rooms,
   initialState,
-  reducers: {},
+  reducers: {
+    selectRoom(state: Rooms, action: PayloadAction<Room>) {
+      console.log(action.payload);
+      state.currentRoom = action.payload;
+    },
+  },
   extraReducers: (builder): void => {
     builder.addCase(
       createRoom.fulfilled,
@@ -36,3 +41,4 @@ const roomsSlice = createSlice({
 });
 
 export default roomsSlice.reducer;
+export const { selectRoom } = roomsSlice.actions;

@@ -19,6 +19,7 @@ export * from './thunks/getCurrentUser';
 export * from './thunks/createRoom';
 export * from './thunks/getRooms';
 export * from './thunks/getCurrentRoom';
+export * from './thunks/enterRoom';
 export * from './slices/types';
 export * from './slices/sessionSlice';
 export * from './slices/roomsSlice';
