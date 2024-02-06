@@ -9,3 +9,7 @@ export type RoomProps = {
   messages: [];
   members: [];
 };
+
+export type RoomAuthModalProps = {
+  isOpen: boolean;
+};

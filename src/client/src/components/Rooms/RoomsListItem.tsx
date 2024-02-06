@@ -9,11 +9,10 @@ export const RoomsListItem: FC<RoomsListItemProps> = ({
   members,
   pwProtected,
 }): JSX.Element => {
+  const urlPath = pwProtected ? '/auth' : '';
+
   return (
-    <Link
-      to={`/rooms/${roomId}${pwProtected ? '/auth' : ''}`}
-      className='rooms-item'
-    >
+    <Link to={`/rooms/${roomId}${urlPath}`} className='rooms-item'>
       <div className='rooms-item-cover'>
         {pwProtected && <FaLock title='Password Protected' size={25} />}
       </div>

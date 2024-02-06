@@ -1,13 +1,16 @@
 import './assets/styles.scss';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, getRooms } from '../../store';
 import { SearchRooms } from './SearchRooms';
 import { RoomsListItem } from './RoomsListItem';
+import { RoomAuthModal } from './RoomAuthModal';
 
 export const RoomsList: FC = (): JSX.Element => {
-  const dispatch = useDispatch<AppDispatch>();
+  window.document.title = 'Rooms';
 
+  const dispatch = useDispatch<AppDispatch>();
+  const [isOpen, setIsOpen] = useState(false);
   const { roomsList } = useSelector((state: RootState) => state.rooms);
 
   useEffect((): void => {
@@ -31,6 +34,7 @@ export const RoomsList: FC = (): JSX.Element => {
       <SearchRooms />
       <h1 className='rooms-list-header'>Available Rooms</h1>
       <div className='rooms-list'>{renderRoomsList}</div>
+      <RoomAuthModal isOpen={isOpen} />
     </div>
   );
 };
