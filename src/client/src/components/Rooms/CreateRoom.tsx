@@ -24,9 +24,9 @@ export const CreateRoom: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="rooms-create">
+    <div className="rooms-form-container">
       <h2>Create a Room</h2>
-      <div className="rooms-create-form-container">
+      <div className="rooms-form">
         <form className="form" onSubmit={createNewRoom}>
           <input
             type="text"

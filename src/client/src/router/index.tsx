@@ -6,6 +6,7 @@ import { AuthSignup } from '../components/Auth/AuthSignup';
 import { CreateRoom } from '../components/Rooms/CreateRoom';
 import { RoomsList } from '../components/Rooms/RoomsList';
 import { Room } from '../components/Rooms/Room';
+import { AuthRoom } from '../components/Rooms/AuthRoom';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: '/rooms/:roomId',
         element: <Room />,
+      },
+      {
+        path: '/rooms/:roomId/auth',
+        element: <AuthRoom />,
       },
     ],
   },

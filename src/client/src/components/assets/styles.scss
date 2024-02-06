@@ -30,8 +30,14 @@ body {
     font-size: 17px;
     box-sizing: border-box;
     align-self: center;
+    background-color: $dark;
     border-radius: $border-r7;
-    border: 1px solid $grey;
+    border: 1px solid $dark;
+    color: $grey;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
 
@@ -42,7 +48,7 @@ body {
   cursor: pointer;
   font-size: 17px;
   border-radius: $border-r7;
-  border: 1px solid $dark-blue;
+  border: 1px solid $purple;
   background-color: $purple;
   font-weight: bold;
   color: $white;
