@@ -61,10 +61,10 @@ export default (app: Express): void => {
     const { roomId, password } = req.body;
     const room = await Room.findOne({ roomId }).select('-_id -__v');
     if (room) {
-      if (room.password && (await comparePasswords(room.password, password))) {
-        return res.send(room);
+      if (room.password && (!password || !await comparePasswords(room.password, password))) {
+        return res.status(403).json({ roomId, roomName: room.roomName, pwProtected: true, authorized: false, message: 'Incorrect password' });
       }
+      return res.send({ roomId, roomName: room.roomName, authorized: true });
     }
-    return res.status(403).json({ message: 'Incorrect password' });
   });
 };

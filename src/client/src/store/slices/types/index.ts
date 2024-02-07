@@ -20,13 +20,6 @@ export type Session = {
   message: string | undefined;
 };
 
-export type RoomItem = {
-  roomId: number;
-  roomName: string;
-  members: number;
-  pwProtected?: boolean;
-};
-
 export type RoomMessage = {
   type: string;
   sentAt: Date;
@@ -37,12 +30,14 @@ export type RoomMessage = {
 export type Room = {
   roomId: number;
   roomName: string;
-  members?: Array<UserData>;
+  members?: Array<UserData> | number;
   messages?: Array<RoomMessage>;
-  password?: string;
+  password?: string | undefined;
+  pwProtected?: boolean;
+  authorized?: boolean;
 };
 
 export type Rooms = {
-  roomsList: Array<RoomItem>;
+  roomsList: Array<Room>;
   currentRoom: Room | undefined;
 };

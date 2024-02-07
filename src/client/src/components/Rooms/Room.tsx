@@ -15,9 +15,11 @@ export const Room: FC = (): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <div className="room">
-      <div className="room-header"></div>
-      <div className="room-body"></div>
+    <div className='room'>
+      <div className='room-header'>{currentRoom?.roomName}</div>
+      <div className='room-body'>
+        <RoomChat />
+      </div>
     </div>
   );
 };

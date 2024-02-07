@@ -1,5 +1,3 @@
-import { MouseEventHandler } from 'react';
-
 export type RoomsListItemProps = {
   roomName: string;
   roomId: number;

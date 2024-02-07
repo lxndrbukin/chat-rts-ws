@@ -1,6 +1,7 @@
 import { FC, FormEvent } from 'react';
 import { RoomAuthModalProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { AppDispatch, enterRoom } from '../../store';
 import Modal from 'react-modal';
 import { RootState } from '../../store';
@@ -10,24 +11,31 @@ Modal.setAppElement('#root');
 export const RoomAuthModal: FC<RoomAuthModalProps> = ({
   isOpen,
   toggleModal,
-}): JSX.Element => {
+}): JSX.Element | null => {
   const dispatch = useDispatch<AppDispatch>();
-  const { roomId } = useSelector(
-    (state: RootState) => state.rooms.currentRoom!
-  );
+  const { currentRoom } = useSelector((state: RootState) => state.rooms);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    const target = e.target as typeof e.target & {
-      password: { value: string };
-    };
-    const { password } = target;
-    dispatch(enterRoom({ roomId, password: password.value }));
-    toggleModal();
+    e.preventDefault();
+    const { roomId, pwProtected } = currentRoom!;
+    if (pwProtected) {
+      const target = e.target as typeof e.target & {
+        password: { value: string };
+      };
+      const { password } = target;
+      if (roomId) dispatch(enterRoom({ roomId, password: password.value }));
+    } else {
+      if (roomId) dispatch(enterRoom({ roomId, password: undefined }));
+    }
   };
 
   const handleToggle = (): void => {
     toggleModal();
   };
+
+  const renderInput = currentRoom?.pwProtected && (
+    <input className='form-input' placeholder='Password' name='password' />
+  );
 
   const customStyles = {
     content: {
@@ -39,27 +47,27 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
       transform: 'translate(-50%, -50%)',
       height: 'fit-content',
       padding: '15px',
-      backgroundColor: '#313338',
-      border: '1px solid #232428',
+      backgroundColor: 'transparent',
+      border: 'none',
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.72)',
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
       zIndex: 1,
     },
   };
 
+  if (currentRoom?.authorized) {
+    return <Navigate to={`/rooms/${currentRoom.roomId}`} />;
+  }
+
   return (
     <Modal onRequestClose={handleToggle} isOpen={isOpen} style={customStyles}>
-      <div className="rooms-form-container">
-        <h2>Enter the Room</h2>
-        <div className="rooms-form">
-          <form className="form">
-            <input
-              className="form-input"
-              placeholder="Password"
-              name="password"
-            />
-            <button className="form-btn">Join</button>
+      <div className='rooms-form-container'>
+        <div className='rooms-form'>
+          <h2>Join {currentRoom?.roomName}</h2>
+          <form onSubmit={handleSubmit} className='form'>
+            {renderInput}
+            <button className='form-btn'>Join</button>
           </form>
         </div>
       </div>

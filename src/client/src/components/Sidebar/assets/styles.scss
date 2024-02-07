@@ -11,12 +11,13 @@
   .sidebar-logo {
     display: flex;
     justify-content: center;
-    padding: $spacing-md;
+    padding: $spacing-sm;
     background-color: $purple;
     border-radius: $border-r10;
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
     align-self: center;
+    box-sizing: border-box;
 
     a {
       color: $white;

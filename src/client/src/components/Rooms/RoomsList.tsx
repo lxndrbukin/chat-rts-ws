@@ -25,7 +25,8 @@ export const RoomsList: FC = (): JSX.Element => {
     const { roomName, roomId, pwProtected, members } = room;
     return (
       <RoomsListItem
-        members={members}
+        key={roomId}
+        members={(members as number) || 0}
         roomId={roomId}
         roomName={roomName}
         pwProtected={pwProtected}
@@ -34,12 +35,16 @@ export const RoomsList: FC = (): JSX.Element => {
     );
   });
 
+  const renderModal = roomsList && (
+    <RoomAuthModal toggleModal={() => toggleModal(false)} isOpen={isOpen} />
+  );
+
   return (
-    <div className="rooms-list-container">
+    <div className='rooms-list-container'>
       <SearchRooms />
-      <h1 className="rooms-list-header">Available Rooms</h1>
-      <div className="rooms-list">{renderRoomsList}</div>
-      <RoomAuthModal toggleModal={() => toggleModal(false)} isOpen={isOpen} />
+      <h1 className='rooms-list-header'>Available Rooms</h1>
+      <div className='rooms-list'>{renderRoomsList}</div>
+      {renderModal}
     </div>
   );
 };

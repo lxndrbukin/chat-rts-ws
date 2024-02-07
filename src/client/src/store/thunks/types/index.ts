@@ -10,5 +10,5 @@ export type RoomFormValues = {
 
 export type RoomAuthValues = {
   roomId: number;
-  password: string;
+  password: string | undefined;
 };

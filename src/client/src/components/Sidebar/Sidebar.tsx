@@ -50,7 +50,7 @@ export const Sidebar: FC = (): JSX.Element => {
     <div className='sidebar'>
       <div title='ChatRoom' className='sidebar-logo'>
         <Link to='/'>
-          <IoMdChatbubbles size={38} />
+          <IoMdChatbubbles size={36} />
         </Link>
       </div>
       <nav className='sidebar-links'>
