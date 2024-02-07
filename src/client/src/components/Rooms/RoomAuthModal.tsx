@@ -34,7 +34,7 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
   };
 
   const renderInput = currentRoom?.pwProtected && (
-    <input className='form-input' placeholder='Password' name='password' />
+    <input className="form-input" placeholder="Password" name="password" />
   );
 
   const customStyles = {
@@ -62,12 +62,12 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
 
   return (
     <Modal onRequestClose={handleToggle} isOpen={isOpen} style={customStyles}>
-      <div className='rooms-form-container'>
-        <div className='rooms-form'>
+      <div className="rooms-form-container">
+        <div className="rooms-form">
           <h2>Join {currentRoom?.roomName}</h2>
-          <form onSubmit={handleSubmit} className='form'>
+          <form onSubmit={handleSubmit} className="form">
             {renderInput}
-            <button className='form-btn'>Join</button>
+            <button className="form-btn">Join</button>
           </form>
         </div>
       </div>

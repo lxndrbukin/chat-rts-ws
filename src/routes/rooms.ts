@@ -59,10 +59,25 @@ export default (app: Express): void => {
 
   app.post('/_api/rooms/:roomId/auth', async (req: Request, res: Response) => {
     const { roomId, password } = req.body;
-    const room = await Room.findOne({ roomId }).select('-_id -__v');
+    let room = await Room.findOne({ roomId }).select('-_id -__v');
     if (room) {
-      if (room.password && (!password || !await comparePasswords(room.password, password))) {
-        return res.status(403).json({ roomId, roomName: room.roomName, pwProtected: true, authorized: false, message: 'Incorrect password' });
+      if (
+        room.password &&
+        (!password || !(await comparePasswords(room.password, password)))
+      ) {
+        return res.status(403).json({
+          roomId,
+          roomName: room.roomName,
+          pwProtected: true,
+          authorized: false,
+          message: 'Incorrect password',
+        });
+      }
+      if (req.session) {
+        await Room.updateOne(
+          { roomId },
+          { $addToSet: { members: req.session.userId } }
+        );
       }
       return res.send({ roomId, roomName: room.roomName, authorized: true });
     }

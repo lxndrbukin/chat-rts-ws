@@ -8,7 +8,7 @@ export type RoomFormValues = {
   password?: string;
 };
 
-export type RoomAuthValues = {
+export type RoomAuthData = {
   roomId: number;
   password: string | undefined;
 };
