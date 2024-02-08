@@ -17,8 +17,8 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { roomId, pwProtected } = currentRoom!;
-    if (pwProtected) {
+    const { roomId, roomAuth } = currentRoom!;
+    if (roomAuth?.pwProtected) {
       const target = e.target as typeof e.target & {
         password: { value: string };
       };
@@ -33,8 +33,12 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
     toggleModal();
   };
 
-  const renderInput = currentRoom?.pwProtected && (
+  const renderInput = currentRoom?.roomAuth?.pwProtected && (
     <input className="form-input" placeholder="Password" name="password" />
+  );
+
+  const renderErrorMsg = currentRoom?.roomAuth?.message && (
+    <span className="form-error">{currentRoom.roomAuth.message}</span>
   );
 
   const customStyles = {
@@ -56,7 +60,7 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
     },
   };
 
-  if (currentRoom?.authorized) {
+  if (currentRoom?.roomAuth?.authorized) {
     return <Navigate to={`/rooms/${currentRoom.roomId}`} />;
   }
 
@@ -67,6 +71,7 @@ export const RoomAuthModal: FC<RoomAuthModalProps> = ({
           <h2>Join {currentRoom?.roomName}</h2>
           <form onSubmit={handleSubmit} className="form">
             {renderInput}
+            {renderErrorMsg}
             <button className="form-btn">Join</button>
           </form>
         </div>

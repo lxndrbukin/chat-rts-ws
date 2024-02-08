@@ -11,13 +11,24 @@ export const Room: FC = (): JSX.Element => {
   const { roomId } = useParams();
 
   useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:5001');
+    webSocket.addEventListener('open', () => {
+      const stringify = JSON.stringify({ roomId });
+      webSocket.send(stringify);
+    });
+    webSocket.addEventListener('message', (data) => {
+      console.log(data);
+    });
+  }, [roomId]);
+
+  useEffect(() => {
     if (roomId) dispatch(getCurrentRoom(roomId));
   }, [dispatch]);
 
   return (
-    <div className='room'>
-      <div className='room-header'>{currentRoom?.roomName}</div>
-      <div className='room-body'>
+    <div className="room">
+      <div className="room-header">{currentRoom?.roomName}</div>
+      <div className="room-body">
         <RoomChat />
       </div>
     </div>

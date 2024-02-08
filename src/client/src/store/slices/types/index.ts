@@ -33,8 +33,11 @@ export type Room = {
   members?: Array<UserData> | number;
   messages?: Array<RoomMessage>;
   password?: string | undefined;
-  pwProtected?: boolean;
-  authorized?: boolean;
+  roomAuth?: {
+    pwProtected?: boolean;
+    authorized?: boolean;
+    message?: string;
+  };
 };
 
 export type Rooms = {

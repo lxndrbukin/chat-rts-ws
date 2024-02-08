@@ -22,14 +22,14 @@ export const RoomsList: FC = (): JSX.Element => {
   };
 
   const renderRoomsList = roomsList.map((room) => {
-    const { roomName, roomId, pwProtected, members } = room;
+    const { roomName, roomId, roomAuth, members } = room;
     return (
       <RoomsListItem
         key={roomId}
         members={(members as number) || 0}
         roomId={roomId}
         roomName={roomName}
-        pwProtected={pwProtected}
+        pwProtected={roomAuth?.pwProtected}
         toggleModal={() => toggleModal(true)}
       />
     );
@@ -40,10 +40,10 @@ export const RoomsList: FC = (): JSX.Element => {
   );
 
   return (
-    <div className='rooms-list-container'>
+    <div className="rooms-list-container">
       <SearchRooms />
-      <h1 className='rooms-list-header'>Available Rooms</h1>
-      <div className='rooms-list'>{renderRoomsList}</div>
+      <h1 className="rooms-list-header">Available Rooms</h1>
+      <div className="rooms-list">{renderRoomsList}</div>
       {renderModal}
     </div>
   );

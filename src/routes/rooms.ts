@@ -12,7 +12,7 @@ export default (app: Express): void => {
         roomId,
         roomName,
         members: members.length,
-        pwProtected: password ? true : undefined,
+        roomAuth: { pwProtected: password ? true : undefined },
       };
       return roomData;
     });
@@ -68,9 +68,11 @@ export default (app: Express): void => {
         return res.status(403).json({
           roomId,
           roomName: room.roomName,
-          pwProtected: true,
-          authorized: false,
-          message: 'Incorrect password',
+          roomAuth: {
+            pwProtected: true,
+            authorized: false,
+            message: 'Incorrect password',
+          },
         });
       }
       if (req.session) {
@@ -79,7 +81,11 @@ export default (app: Express): void => {
           { $addToSet: { members: req.session.userId } }
         );
       }
-      return res.send({ roomId, roomName: room.roomName, authorized: true });
+      return res.send({
+        roomId,
+        roomName: room.roomName,
+        roomAuth: { authorized: true },
+      });
     }
   });
 };
