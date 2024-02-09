@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { getCurrentRoom } from '../../store';
 import { RoomChat } from './RoomChat';
+import { RoomMembersList } from './RoomMembersList';
 
 export const Room: FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,10 +27,11 @@ export const Room: FC = (): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <div className="room">
-      <div className="room-header">{currentRoom?.roomName}</div>
-      <div className="room-body">
+    <div className='room'>
+      <div className='room-header'>{currentRoom?.roomName}</div>
+      <div className='room-body'>
         <RoomChat />
+        <RoomMembersList />
       </div>
     </div>
   );

@@ -168,6 +168,8 @@
             background-color: $dark;
             border: 1px solid $dark;
             color: $grey;
+            overflow-wrap: break-word;
+            resize: both;
 
             &:focus {
               outline: none;
