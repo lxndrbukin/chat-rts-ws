@@ -6,46 +6,38 @@ import {
   useState,
   ChangeEvent,
 } from 'react';
+import { RoomChatProps } from './types';
 import { useSelector } from 'react-redux';
 import { LuSendHorizonal } from 'react-icons/lu';
+import { RoomChatMsg } from './RoomChatMsg';
 
-export const RoomChat: FC = (): JSX.Element => {
+export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputTxt, setInputTxt] = useState('');
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputTxt(e.target.value);
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const target = e.target as typeof e.target & {
-    //   chatMsg: { value: string };
-    // };
-
-    console.log(inputTxt);
+    const target = e.target as typeof e.target & {
+      chatMsg: { value: string };
+    };
+    console.log(target.chatMsg.value);
   };
 
-  const onEnterPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-    }
-  };
+  const renderMessages = messages.map((message) => {
+    return <RoomChatMsg />;
+  });
 
   return (
-    <div className='room-chat-container'>
-      <div className='room-chat'>
-        <div className='room-chat-messages'></div>
-        <form ref={formRef} onSubmit={handleSubmit} className='room-chat-form'>
-          <textarea
-            className='room-chat-input'
-            placeholder='Write a message...'
-            name='chatMsg'
-            onKeyDown={onEnterPress}
-            onChange={handleChange}
+    <div className="room-chat-container">
+      <div className="room-chat">
+        <div className="room-chat-messages">{renderMessages}</div>
+        <form ref={formRef} onSubmit={handleSubmit} className="room-chat-form">
+          <input
+            className="room-chat-input"
+            placeholder="Write a message..."
+            name="chatMsg"
           />
-          {/* <div ref={inputRef} contentEditable className='room-chat-input'></div> */}
-          <button className='room-chat-send'>
+          <button className="room-chat-send">
             <LuSendHorizonal size={30} />
           </button>
         </form>

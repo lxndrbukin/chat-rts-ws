@@ -6,12 +6,20 @@ export type RoomsListItemProps = {
   toggleModal: Function;
 };
 
-export type RoomProps = {
-  messages: [];
-  members: [];
-};
+export type RoomProps = {};
 
 export type RoomAuthModalProps = {
   isOpen: boolean;
   toggleModal: Function;
+};
+
+export type RoomChatMsgProps = {
+  type: string;
+  msg: string;
+  date: Date;
+  username?: string;
+};
+
+export type RoomChatProps = {
+  messages: Array<RoomChatMsgProps>;
 };
