@@ -5,13 +5,17 @@ export default (wss: WebSocketServer) => {
   wss.on('connection', (ws: WebSocket): void => {
     ws.on('message', (data: string) => {
       const parsedData = JSON.parse(data);
+      console.log(parsedData);
       const room = parsedData.roomId;
-      if (!rooms[room]) {
-        rooms[room] = [];
-      }
-      rooms[room].push(ws);
+      if (!rooms[room]) rooms[room] = [];
+      if (!rooms[room].includes(ws)) rooms[room].push(ws);
       rooms[room].forEach((client) => {
-        client.send('Welcome');
+        const msg = JSON.stringify({
+          type: parsedData.type,
+          text: parsedData.text,
+          date: new Date(),
+        });
+        client.send(msg);
       });
       console.log(rooms);
     });

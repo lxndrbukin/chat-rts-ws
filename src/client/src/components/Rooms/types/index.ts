@@ -15,8 +15,8 @@ export type RoomAuthModalProps = {
 
 export type RoomChatMsgProps = {
   type: string;
-  msg: string;
-  date: Date;
+  text: string;
+  sentAt: Date;
   username?: string;
 };
 

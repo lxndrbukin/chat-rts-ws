@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Slices, Rooms, Room } from './types';
+import { Slices, Rooms, Room, RoomMessage } from './types';
 import { createRoom } from '../thunks/createRoom';
 import { getRooms } from '../thunks/getRooms';
 import { getCurrentRoom } from '../thunks/getCurrentRoom';
@@ -16,6 +16,14 @@ const roomsSlice = createSlice({
   reducers: {
     selectRoom(state: Rooms, action: PayloadAction<Room>) {
       state.currentRoom = action.payload;
+    },
+    pushMessage(state: Rooms, action: PayloadAction<RoomMessage>) {
+      if (state.currentRoom && state.currentRoom.messages) {
+        state.currentRoom.messages = [
+          ...state.currentRoom.messages,
+          action.payload,
+        ];
+      }
     },
   },
   extraReducers: (builder): void => {
@@ -37,11 +45,14 @@ const roomsSlice = createSlice({
         state.currentRoom = action.payload;
       }
     );
-    builder.addCase(enterRoom.fulfilled, (state: Rooms, action: PayloadAction<Room>) => {
-      state.currentRoom = action.payload;
-    });
+    builder.addCase(
+      enterRoom.fulfilled,
+      (state: Rooms, action: PayloadAction<Room>) => {
+        state.currentRoom = action.payload;
+      }
+    );
   },
 });
 
 export default roomsSlice.reducer;
-export const { selectRoom } = roomsSlice.actions;
+export const { selectRoom, pushMessage } = roomsSlice.actions;
