@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import { RoomProps } from './types';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
+import { AppDispatch, RootState, UserData } from '../../store';
 import { getCurrentRoom, pushMessage } from '../../store';
 import { SocketContext } from '../../context/SocketProvider';
 import { RoomChatMsgProps } from './types';
@@ -39,7 +39,9 @@ export const Room: FC<RoomProps> = ({}): JSX.Element => {
       <div className="room-header">{currentRoom?.roomName}</div>
       <div className="room-body">
         <RoomChat messages={currentRoom?.messages || []} />
-        <RoomMembersList />
+        <RoomMembersList
+          members={(currentRoom?.members as Array<UserData>) || []}
+        />
       </div>
     </div>
   );

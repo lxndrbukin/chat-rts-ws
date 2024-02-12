@@ -48,7 +48,7 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   };
 
   const placeholder = (
-    <span className='room-chat-input-placeholder'>Message</span>
+    <span className="room-chat-input-placeholder">Message</span>
   );
 
   const renderMessages = currentRoom?.messages?.map(
@@ -58,19 +58,19 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   );
 
   return (
-    <div className='room-chat-container'>
-      <div className='room-chat'>
-        <ul className='room-chat-messages'>{renderMessages}</ul>
-        <form onSubmit={handleSubmit} className='room-chat-form'>
+    <div className="room-chat-container">
+      <div className="room-chat">
+        <ul className="room-chat-messages">{renderMessages}</ul>
+        <form onSubmit={handleSubmit} className="room-chat-form">
           <div
             onKeyDown={handleKeyDown}
             ref={inputRef}
-            className='room-chat-input'
+            className="room-chat-input"
             contentEditable
             suppressContentEditableWarning
           ></div>
-          {!inputRef.current?.innerText && placeholder}
-          <button className='room-chat-send'>
+          {!inputText.length && placeholder}
+          <button className="room-chat-send">
             <LuSendHorizonal size={30} />
           </button>
         </form>

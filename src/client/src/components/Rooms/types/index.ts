@@ -1,3 +1,5 @@
+import { UserData } from '../../../store';
+
 export type RoomsListItemProps = {
   roomName: string;
   roomId: number;
@@ -22,4 +24,8 @@ export type RoomChatMsgProps = {
 
 export type RoomChatProps = {
   messages: Array<RoomChatMsgProps>;
+};
+
+export type RoomMembersListProps = {
+  members: Array<UserData>;
 };
