@@ -1,11 +1,6 @@
 @import '../../assets/variables.scss';
 
 .rooms-list-container {
-  overflow-y: scroll;
-  height: 100vh;
-  box-sizing: border-box;
-  padding: 20px;
-
   .rooms-list-search-container {
     width: 100%;
     height: 20vw;
@@ -138,7 +133,8 @@
 .room {
   display: grid;
   grid-template-rows: 50px 1fr;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 
   .room-body {
     height: 100%;
@@ -150,35 +146,49 @@
         display: grid;
         grid-template-rows: 1fr auto;
         height: 100%;
+        width: 100%;
 
         .room-chat-messages {
           height: 100%;
+          box-sizing: border-box;
+          margin: 0;
         }
 
         .room-chat-form {
           position: relative;
           display: flex;
           height: fit-content;
+          width: 100%;
+          background-color: $dark;
+          border: 1px solid $dark;
+          border-radius: 7px;
 
           .room-chat-input {
             width: 100%;
             box-sizing: border-box;
-            padding: 0 50px 0 25px;
+            padding: 10px 50px 10px 25px;
             min-height: 45px;
-            background-color: $dark;
-            border: 1px solid $dark;
             color: $grey;
-            overflow-wrap: break-word;
-            resize: both;
+            word-break: break-word;
+            resize: none;
+            overflow-y: auto;
+            position: relative;
+            background-color: transparent;
+            z-index: 1;
 
             &:focus {
               outline: none;
             }
           }
 
-          .room-chat-send {
+          .room-chat-input-placeholder {
             position: absolute;
-            right: 0;
+            z-index: 0;
+            left: 25px;
+            top: 10px;
+          }
+
+          .room-chat-send {
             height: 40px;
             box-sizing: border-box;
             align-self: center;

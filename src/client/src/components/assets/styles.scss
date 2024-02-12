@@ -11,10 +11,14 @@ body {
   height: 100vh;
   display: grid;
   grid-template-columns: 70px 1fr;
-  background-color: $dark-grey-two;
 
   .body {
     width: 100%;
+    padding: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: $dark-grey-two;
+    overflow-y: auto;
   }
 }
 
