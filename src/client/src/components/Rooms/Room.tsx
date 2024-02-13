@@ -16,16 +16,16 @@ export const Room: FC<RoomProps> = ({}): JSX.Element => {
   const webSocket = useContext(SocketContext);
 
   useEffect(() => {
-    // const msgData = JSON.stringify({
-    //   type: 'announcement',
-    //   roomId,
-    //   text: 'Welcome',
-    // });
-    // webSocket.send(msgData);
+    const msgData = JSON.stringify({
+      type: 'connection',
+      roomId,
+    });
+    webSocket.send(msgData);
 
     webSocket.addEventListener('message', (msg) => {
       const msgData = JSON.parse(msg.data);
-      dispatch(sendMessage({ ...msgData, roomId }));
+      if (msgData.type === 'message')
+        dispatch(sendMessage({ ...msgData, roomId }));
     });
   }, [roomId, webSocket]);
 
@@ -34,9 +34,9 @@ export const Room: FC<RoomProps> = ({}): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <div className='room'>
-      <div className='room-header'>{currentRoom?.roomName}</div>
-      <div className='room-body'>
+    <div className="room">
+      <div className="room-header">{currentRoom?.roomName}</div>
+      <div className="room-body">
         <RoomChat messages={currentRoom?.messages || []} />
         <RoomMembersList
           members={(currentRoom?.members as Array<UserData>) || []}

@@ -6,6 +6,7 @@ const RoomSchema = new Schema<Room>({
   roomName: { type: String, required: true },
   password: { type: String, default: undefined },
   members: Array<RoomMember>,
+  online: { type: Number, default: 0 },
   messages: Array<RoomMessage>,
 });
 

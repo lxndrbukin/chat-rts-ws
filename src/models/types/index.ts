@@ -24,6 +24,7 @@ type RoomSchema = {
   roomName: string;
   password: string;
   members: Array<RoomMember>;
+  online: number;
   messages: Array<RoomMessage>;
 };
 
