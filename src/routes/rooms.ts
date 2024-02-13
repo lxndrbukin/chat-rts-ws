@@ -88,4 +88,12 @@ export default (app: Express): void => {
       });
     }
   });
+
+  app.post('/_api/rooms/:roomId/messages', async (req: Request, res: Response) => {
+    console.log(req.body);
+    const { roomId, userId, username, type, text, sentAt } = req.body;
+    const message = { userId, username, type, text, sentAt };
+    await Room.updateOne({ roomId }, { $addToSet: { messages: { ...message } } });
+    return res.send(message);
+  });
 };

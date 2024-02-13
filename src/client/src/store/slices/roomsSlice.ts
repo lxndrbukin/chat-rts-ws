@@ -4,6 +4,7 @@ import { createRoom } from '../thunks/createRoom';
 import { getRooms } from '../thunks/getRooms';
 import { getCurrentRoom } from '../thunks/getCurrentRoom';
 import { enterRoom } from '../thunks/enterRoom';
+import { sendMessage } from '../thunks/sendMessage';
 
 const initialState: Rooms = {
   roomsList: [],
@@ -51,6 +52,11 @@ const roomsSlice = createSlice({
         state.currentRoom = action.payload;
       }
     );
+    builder.addCase(sendMessage.fulfilled, (state: Rooms, action: PayloadAction<RoomMessage>) => {
+      if (state.currentRoom && state.currentRoom.messages) {
+        state.currentRoom.messages = [...state.currentRoom.messages, action.payload];
+      }
+    });
   },
 });
 

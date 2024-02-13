@@ -10,8 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('https://www.minecraft.net/content/dam/games/badger/key-art/TheArrival_1170x500.png')
-      no-repeat center;
+    background: url('https://www.minecraft.net/content/dam/games/badger/key-art/TheArrival_1170x500.png') no-repeat center;
     background-size: cover;
     border-radius: $border-r7;
     border: 1px solid transparent;
@@ -140,7 +139,7 @@
   width: 100%;
 
   .room-header {
-    background-color: $dark;
+    background-color: $dark-grey-two;
   }
 
   .room-body {

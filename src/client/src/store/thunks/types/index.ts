@@ -12,3 +12,11 @@ export type RoomAuthData = {
   roomId: number;
   password: string | undefined;
 };
+
+export type RoomMessageData = {
+  roomId: string;
+  type: string;
+  userId?: string;
+  username?: string;
+  text: string;
+};

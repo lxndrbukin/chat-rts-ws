@@ -20,6 +20,7 @@ export type RoomChatMsgProps = {
   text: string;
   sentAt: Date;
   username?: string;
+  userId?: number;
 };
 
 export type RoomChatProps = {
