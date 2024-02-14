@@ -4,6 +4,7 @@ export type RoomsListItemProps = {
   roomName: string;
   roomId: number;
   members: number;
+  online: number;
   pwProtected?: boolean;
   toggleModal: Function;
 };

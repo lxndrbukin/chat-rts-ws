@@ -3,6 +3,7 @@ import { WebSocketServer, WebSocket } from 'ws';
 export default (wss: WebSocketServer) => {
   const rooms: { [key: string]: Array<WebSocket> } = {};
   wss.on('connection', (ws: WebSocket): void => {
+    ws.send(JSON.stringify({ type: 'totalOnline', rooms }));
     ws.on('message', (data: string) => {
       const parsedData = JSON.parse(data);
       console.log(parsedData);

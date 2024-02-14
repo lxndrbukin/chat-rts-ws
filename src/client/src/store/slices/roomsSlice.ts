@@ -18,13 +18,9 @@ const roomsSlice = createSlice({
     selectRoom(state: Rooms, action: PayloadAction<Room>) {
       state.currentRoom = action.payload;
     },
-    pushMessage(state: Rooms, action: PayloadAction<RoomMessage>) {
-      if (state.currentRoom && state.currentRoom.messages) {
-        state.currentRoom.messages = [
-          ...state.currentRoom.messages,
-          action.payload,
-        ];
-      }
+    updateOnline(state: Rooms, action: PayloadAction<any>) {
+      state.roomsList.forEach((room) => console.log(action.payload.rooms));
+      // state.roomsList = updatedList;
     },
   },
   extraReducers: (builder): void => {
@@ -52,13 +48,19 @@ const roomsSlice = createSlice({
         state.currentRoom = action.payload;
       }
     );
-    builder.addCase(sendMessage.fulfilled, (state: Rooms, action: PayloadAction<RoomMessage>) => {
-      if (state.currentRoom && state.currentRoom.messages) {
-        state.currentRoom.messages = [...state.currentRoom.messages, action.payload];
+    builder.addCase(
+      sendMessage.fulfilled,
+      (state: Rooms, action: PayloadAction<RoomMessage>) => {
+        if (state.currentRoom && state.currentRoom.messages) {
+          state.currentRoom.messages = [
+            ...state.currentRoom.messages,
+            action.payload,
+          ];
+        }
       }
-    });
+    );
   },
 });
 
 export default roomsSlice.reducer;
-export const { selectRoom, pushMessage } = roomsSlice.actions;
+export const { selectRoom, updateOnline } = roomsSlice.actions;

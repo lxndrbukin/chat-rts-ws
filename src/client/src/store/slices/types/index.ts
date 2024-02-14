@@ -32,6 +32,7 @@ export type Room = {
   roomName: string;
   members?: Array<UserData> | number;
   messages?: Array<RoomMessage>;
+  online?: number;
   password?: string | undefined;
   roomAuth?: {
     pwProtected?: boolean;

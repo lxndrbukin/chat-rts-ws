@@ -1,11 +1,10 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useContext } from 'react';
 import { RoomProps } from './types';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, UserData } from '../../store';
-import { getCurrentRoom, pushMessage, sendMessage } from '../../store';
+import { getCurrentRoom, sendMessage } from '../../store';
 import { SocketContext } from '../../context/SocketProvider';
-import { RoomChatMsgProps } from './types';
 import { RoomChat } from './RoomChat';
 import { RoomMembersList } from './RoomMembersList';
 
