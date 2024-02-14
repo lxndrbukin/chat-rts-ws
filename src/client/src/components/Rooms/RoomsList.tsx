@@ -22,8 +22,9 @@ export const RoomsList: FC = (): JSX.Element => {
   useEffect((): void => {
     webSocket.addEventListener('message', (msg) => {
       const parsedData = JSON.parse(msg.data);
-      console.log(msg);
-      if (parsedData.type === 'totalOnline') dispatch(updateOnline(parsedData));
+      console.log(roomsList);
+      if (parsedData.type === 'totalOnline' && roomsList.length)
+        dispatch(updateOnline(parsedData));
     });
   }, [webSocket]);
 

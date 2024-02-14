@@ -19,8 +19,8 @@ const roomsSlice = createSlice({
       state.currentRoom = action.payload;
     },
     updateOnline(state: Rooms, action: PayloadAction<any>) {
-      state.roomsList.forEach((room) => console.log(action.payload.rooms));
-      // state.roomsList = updatedList;
+      state.roomsList = [...state.roomsList];
+      console.log(state.roomsList);
     },
   },
   extraReducers: (builder): void => {
