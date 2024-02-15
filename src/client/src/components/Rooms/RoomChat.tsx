@@ -19,6 +19,7 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null);
   const webSocket = useContext(SocketContext);
   const [inputText, setInputText] = useState('');
+  const [typing, setTyping] = useState('');
   const { userData } = useSelector((state: RootState) => state.session);
   const { currentRoom } = useSelector((state: RootState) => state.rooms);
   const { roomId } = useParams();
@@ -26,6 +27,9 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   useEffect(() => {
     webSocket.addEventListener('message', (msgData) => {
       const parsedData = JSON.parse(msgData.data);
+      if (parsedData.type === 'typing') {
+        setTyping(`${parsedData.username} is typing`);
+      }
     });
   }, [webSocket]);
 
@@ -57,8 +61,12 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
     }
   };
 
+  const handleTyping = () => {
+    if (!inputText.length) setTyping('');
+  };
+
   const placeholder = (
-    <span className='room-chat-input-placeholder'>Message</span>
+    <span className="room-chat-input-placeholder">Message</span>
   );
 
   const renderMessages = currentRoom?.messages?.map(
@@ -68,19 +76,23 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   );
 
   return (
-    <div className='room-chat-container'>
-      <div className='room-chat'>
-        <ul className='room-chat-messages'>{renderMessages}</ul>
-        <form onSubmit={handleSubmit} className='room-chat-form'>
+    <div className="room-chat-container">
+      <div className="room-chat">
+        <ul className="room-chat-messages">{renderMessages}</ul>
+        {typing && <span>{typing}</span>}
+        <form onSubmit={handleSubmit} className="room-chat-form">
           <div
             onKeyDown={handleKeyDown}
+            onBlur={handleTyping}
+            onFocus={handleTyping}
+            onChange={handleTyping}
             ref={inputRef}
-            className='room-chat-input'
+            className="room-chat-input"
             contentEditable
             suppressContentEditableWarning
           ></div>
-          {!inputText.length && placeholder}
-          <button className='room-chat-send'>
+          {!inputText && placeholder}
+          <button className="room-chat-send">
             <LuSendHorizonal size={30} />
           </button>
         </form>

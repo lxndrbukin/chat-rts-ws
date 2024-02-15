@@ -10,7 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('https://www.minecraft.net/content/dam/games/badger/key-art/TheArrival_1170x500.png') no-repeat center;
+    background: url('https://www.minecraft.net/content/dam/games/badger/key-art/TheArrival_1170x500.png')
+      no-repeat center;
     background-size: cover;
     border-radius: $border-r7;
     border: 1px solid transparent;
@@ -157,13 +158,14 @@
         width: 100%;
 
         .room-chat-messages {
-          height: 100%;
+          height: calc(100vh - 136px);
           box-sizing: border-box;
           margin: 0;
           list-style: none;
           padding: 0;
           display: grid;
           grid-auto-rows: min-content;
+          overflow-y: auto;
 
           .room-chat-message {
             padding: 10px;
