@@ -5,6 +5,7 @@ import { getRooms } from '../thunks/getRooms';
 import { getCurrentRoom } from '../thunks/getCurrentRoom';
 import { enterRoom } from '../thunks/enterRoom';
 import { sendMessage } from '../thunks/sendMessage';
+import { updateRoomOnline } from '../thunks/updateRoomOnline';
 
 const initialState: Rooms = {
   roomsList: [],
@@ -20,7 +21,6 @@ const roomsSlice = createSlice({
     },
     updateOnline(state: Rooms, action: PayloadAction<any>) {
       state.roomsList = [...state.roomsList];
-      console.log(state.roomsList);
     },
   },
   extraReducers: (builder): void => {
@@ -57,6 +57,12 @@ const roomsSlice = createSlice({
             action.payload,
           ];
         }
+      }
+    );
+    builder.addCase(
+      updateRoomOnline.fulfilled,
+      (state: Rooms, action: PayloadAction<Array<Room>>) => {
+        state.roomsList = action.payload;
       }
     );
   },

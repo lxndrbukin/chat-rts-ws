@@ -20,13 +20,12 @@ export const RoomsList: FC = (): JSX.Element => {
   }, [dispatch]);
 
   useEffect((): void => {
+    webSocket.send(JSON.stringify({ type: 'roomsList' }));
     webSocket.addEventListener('message', (msg) => {
       const parsedData = JSON.parse(msg.data);
-      console.log(roomsList);
-      if (parsedData.type === 'totalOnline' && roomsList.length)
-        dispatch(updateOnline(parsedData));
+      if (parsedData.type === 'totalOnline') dispatch(updateOnline(parsedData));
     });
-  }, [webSocket]);
+  }, [webSocket, dispatch]);
 
   const toggleModal = (bool: boolean): void => {
     setIsOpen(bool);
@@ -52,10 +51,10 @@ export const RoomsList: FC = (): JSX.Element => {
   );
 
   return (
-    <div className="rooms-list-container">
+    <div className='rooms-list-container'>
       <SearchRooms />
-      <h1 className="rooms-list-header">Available Rooms</h1>
-      <div className="rooms-list">{renderRoomsList}</div>
+      <h1 className='rooms-list-header'>Available Rooms</h1>
+      <div className='rooms-list'>{renderRoomsList}</div>
       {renderModal}
     </div>
   );

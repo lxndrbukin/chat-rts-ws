@@ -21,6 +21,10 @@ export const Room: FC<RoomProps> = ({}): JSX.Element => {
     });
     webSocket.send(msgData);
 
+    webSocket.addEventListener('close', () => {
+      console.log('Closed');
+    });
+
     webSocket.addEventListener('message', (msg) => {
       const msgData = JSON.parse(msg.data);
       if (msgData.type === 'message')
@@ -33,9 +37,9 @@ export const Room: FC<RoomProps> = ({}): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <div className="room">
-      <div className="room-header">{currentRoom?.roomName}</div>
-      <div className="room-body">
+    <div className='room'>
+      <div className='room-header'>{currentRoom?.roomName}</div>
+      <div className='room-body'>
         <RoomChat messages={currentRoom?.messages || []} />
         <RoomMembersList
           members={(currentRoom?.members as Array<UserData>) || []}

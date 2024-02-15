@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   useContext,
+  useEffect,
 } from 'react';
 import { RoomChatProps } from './types';
 import { useSelector } from 'react-redux';
@@ -22,6 +23,12 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   const { currentRoom } = useSelector((state: RootState) => state.rooms);
   const { roomId } = useParams();
 
+  useEffect(() => {
+    webSocket.addEventListener('message', (msgData) => {
+      const parsedData = JSON.parse(msgData.data);
+    });
+  }, [webSocket]);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(inputRef.current?.innerHTML);
@@ -36,6 +43,9 @@ export const RoomChat: FC<RoomChatProps> = ({ messages }): JSX.Element => {
   };
 
   const handleKeyDown = (e: KeyboardEvent | FormEvent): void => {
+    webSocket.send(
+      JSON.stringify({ type: 'typing', roomId, username: userData?.username })
+    );
     if (
       (e as KeyboardEvent).key === 'Enter' &&
       !(e as KeyboardEvent).shiftKey
