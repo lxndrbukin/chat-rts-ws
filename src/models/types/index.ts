@@ -2,6 +2,7 @@ type UserSchema = {
   userId: number;
   avatar: string;
   email: string;
+  status: string;
   username: string;
   password: string;
 };

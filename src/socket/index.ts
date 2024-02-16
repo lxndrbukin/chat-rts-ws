@@ -1,12 +1,22 @@
 import { WebSocketServer, WebSocket } from 'ws';
+import User from '../models/User';
 
 export default (wss: WebSocketServer) => {
-  const rooms: { [key: string]: Array<WebSocket>; } = {};
+  const rooms: { [key: string]: Array<WebSocket> } = {};
   wss.on('connection', (ws: WebSocket): void => {
-    ws.on('message', (data: string) => {
+    ws.on('message', async (data: string) => {
       ws.send(JSON.stringify({ type: 'totalOnline', rooms }));
       const parsedData = JSON.parse(data);
-      console.log(parsedData);
+      if (parsedData.type === 'connection') {
+        const { userId } = parsedData;
+        await User.findOneAndUpdate({ userId }, { status: 'Online' });
+        ws.on('close', async () => {
+          console.log('hi');
+          await User.findOneAndUpdate({ userId }, { status: 'Offline' });
+          if (rooms[room])
+            rooms[room] = rooms[room].filter((user) => user !== ws);
+        });
+      }
       const room = parsedData.roomId;
       if (room && !rooms[room]) rooms[room] = [];
       if (room && !rooms[room].includes(ws)) {
@@ -24,10 +34,6 @@ export default (wss: WebSocketServer) => {
           client.send(msg);
         });
       }
-      ws.on('close', () => {
-        console.log('closed');
-        if (rooms[room]) rooms[room] = rooms[room].filter((user) => user !== ws);
-      });
     });
   });
 };

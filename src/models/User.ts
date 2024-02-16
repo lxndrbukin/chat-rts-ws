@@ -9,6 +9,7 @@ const UserSchema: Schema = new Schema<User>({
       'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg',
   },
   email: { type: String, required: true },
+  status: { type: String, default: 'Online' },
   username: { type: String, required: true },
   password: { type: String, required: true },
 });
