@@ -15,7 +15,11 @@ const isError = (payload: any): payload is ErrorMessage => payload.message;
 const sessionSlice = createSlice({
   name: Slices.Session,
   initialState,
-  reducers: {},
+  reducers: {
+    updateStatus(state: Session, action: PayloadAction<UserData>) {
+
+    }
+  },
   extraReducers: (builder): void => {
     builder.addCase(
       signup.fulfilled,
