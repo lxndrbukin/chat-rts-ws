@@ -16,7 +16,8 @@ export default (app: Express): void => {
       };
       return roomData;
     });
-    res.send(await Promise.all(roomsList));
+    const resolvedRoomList = await Promise.all(roomsList);
+    res.send(resolvedRoomList);
   });
 
   app.get('/_api/rooms/:roomId', async (req: Request, res: Response) => {
@@ -89,11 +90,17 @@ export default (app: Express): void => {
     }
   });
 
-  app.post('/_api/rooms/:roomId/messages', async (req: Request, res: Response) => {
-    console.log(req.body);
-    const { roomId, userId, username, type, text, sentAt } = req.body;
-    const message = { userId, username, type, text, sentAt };
-    await Room.updateOne({ roomId }, { $addToSet: { messages: { ...message } } });
-    return res.send(message);
-  });
+  app.post(
+    '/_api/rooms/:roomId/messages',
+    async (req: Request, res: Response) => {
+      console.log(req.body);
+      const { roomId, userId, username, type, text, sentAt } = req.body;
+      const message = { userId, username, type, text, sentAt };
+      await Room.updateOne(
+        { roomId },
+        { $addToSet: { messages: { ...message } } }
+      );
+      return res.send(message);
+    }
+  );
 };

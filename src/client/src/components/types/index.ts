@@ -1,3 +1,7 @@
+export enum WSEvent {
+  Message = 'message',
+}
+
 export enum MessageType {
   TotalOnline = 'totalOnline',
   ChatMessage = 'chatMessage',
@@ -5,6 +9,7 @@ export enum MessageType {
   Status = 'status',
   Connected = 'connected',
   Disconnected = 'disconnected',
+  UpdateSessionStatus = 'updateSessionStatus',
   RoomConnection = 'roomConnection',
-  RoomDisconnection = 'roomDisconnection'
+  RoomDisconnection = 'roomDisconnection',
 }

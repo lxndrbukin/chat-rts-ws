@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Slices, Session, UserData, ErrorMessage } from './types';
+import { isError } from './helpers';
 import { signup } from '../thunks/signup';
 import { login } from '../thunks/login';
 import { getCurrentUser } from '../thunks/getCurrentUser';
@@ -10,15 +11,13 @@ const initialState: Session = {
   message: undefined,
 };
 
-const isError = (payload: any): payload is ErrorMessage => payload.message;
-
 const sessionSlice = createSlice({
   name: Slices.Session,
   initialState,
   reducers: {
-    updateStatus(state: Session, action: PayloadAction<UserData>) {
-
-    }
+    updateSessionStatus(state: Session, action: PayloadAction<UserData>) {
+      if (state.userData) state.userData.status = action.payload.status;
+    },
   },
   extraReducers: (builder): void => {
     builder.addCase(
@@ -59,3 +58,4 @@ const sessionSlice = createSlice({
 });
 
 export default sessionSlice.reducer;
+export const { updateSessionStatus } = sessionSlice.actions;

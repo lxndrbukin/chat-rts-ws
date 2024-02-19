@@ -12,6 +12,7 @@ export type UserData = {
   username: string;
   email: string;
   avatar: string;
+  status: string;
 };
 
 export type Session = {
