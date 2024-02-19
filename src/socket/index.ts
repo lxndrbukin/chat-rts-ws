@@ -13,7 +13,8 @@ export default (wss: WebSocketServer): void => {
         case MessageType.Connected || MessageType.UpdateSessionStatus:
           const user = await User.findOneAndUpdate(
             { userId },
-            { status: UserStatus.Online }
+            { status: UserStatus.Online },
+            { new: true }
           );
           ws.send(
             JSON.stringify({

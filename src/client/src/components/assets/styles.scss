@@ -63,3 +63,11 @@ body {
   font-weight: bold;
   color: $white;
 }
+
+.online {
+  background-color: $status-green;
+}
+
+.offline {
+  background-color: $status-grey;
+}

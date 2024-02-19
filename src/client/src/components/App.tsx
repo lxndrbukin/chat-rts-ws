@@ -43,7 +43,7 @@ export const App: FC = (): JSX.Element => {
         webSocket.send(msg);
       });
     }
-  }, [userData, webSocket]);
+  }, [dispatch, webSocket]);
 
   return (
     <div className="app">

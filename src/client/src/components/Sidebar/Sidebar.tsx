@@ -15,13 +15,14 @@ export const Sidebar: FC = (): JSX.Element => {
   const renderSidebarProfile = () => {
     if (userData) {
       return (
-        <div className='sidebar-profile'>
+        <div className="sidebar-profile">
           <img
             title={userData.username}
-            className='sidebar-profile-avatar'
+            className="sidebar-profile-avatar"
             alt={userData.username}
             src={userData.avatar}
           />
+          <div className={`sidebar-profile-status ${userData.status}`}></div>
         </div>
       );
     }
@@ -37,7 +38,7 @@ export const Sidebar: FC = (): JSX.Element => {
             ? `${link.path}/${userData.userId}`
             : link.path;
         return (
-          <li title={link.name} className='sidebar-link' key={link.name}>
+          <li title={link.name} className="sidebar-link" key={link.name}>
             <Link to={path}>{link.icon}</Link>
           </li>
         );
@@ -47,19 +48,19 @@ export const Sidebar: FC = (): JSX.Element => {
   };
 
   return (
-    <div className='sidebar'>
-      <div title='ChatRoom' className='sidebar-logo'>
-        <Link to='/'>
+    <div className="sidebar">
+      <div title="ChatRoom" className="sidebar-logo">
+        <Link to="/">
           <IoMdChatbubbles size={36} />
         </Link>
       </div>
-      <nav className='sidebar-links'>
-        <ul className='sidebar-links-list'>{renderLinks(mainLinks)}</ul>
-        <ul className='sidebar-links-list additional'>
+      <nav className="sidebar-links">
+        <ul className="sidebar-links-list">{renderLinks(mainLinks)}</ul>
+        <ul className="sidebar-links-list additional">
           {renderLinks(additionalLinks)}
         </ul>
       </nav>
-      <div className='sidebar-profile-container'>{renderSidebarProfile()}</div>
+      <div className="sidebar-profile-container">{renderSidebarProfile()}</div>
     </div>
   );
 };
