@@ -35,6 +35,7 @@ export default (wss: WebSocketServer): void => {
         case MessageType.RoomConnection:
           if (roomId && !rooms[roomId]) rooms[roomId] = [];
           if (roomId && !rooms[roomId].includes(ws)) rooms[roomId].push(ws);
+          console.log(rooms[roomId]);
           break;
         case MessageType.RoomDisconnection:
           if (rooms[roomId])

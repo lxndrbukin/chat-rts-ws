@@ -16,7 +16,7 @@ import { Outlet } from 'react-router-dom';
 export const App: FC = (): JSX.Element => {
   const webSocket = useContext(SocketContext);
   const dispatch = useDispatch<AppDispatch>();
-  const { userData } = useSelector(
+  const { userData, isLoggedIn } = useSelector(
     (state: RootState): Session => state.session
   );
 
@@ -43,12 +43,12 @@ export const App: FC = (): JSX.Element => {
         webSocket.send(msg);
       });
     }
-  }, [dispatch, webSocket]);
+  }, [isLoggedIn]);
 
   return (
-    <div className="app">
+    <div className='app'>
       <Sidebar />
-      <div className="body">
+      <div className='body'>
         <Outlet />
       </div>
     </div>

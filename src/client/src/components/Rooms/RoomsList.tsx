@@ -1,7 +1,7 @@
 import './assets/styles.scss';
 import { FC, useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, getRooms, updateOnline } from '../../store';
+import { AppDispatch, RootState, getRooms } from '../../store';
 import { SocketContext } from '../../context/SocketProvider';
 import { SearchRooms } from './SearchRooms';
 import { RoomsListItem } from './RoomsListItem';
@@ -13,19 +13,10 @@ export const RoomsList: FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const [isOpen, setIsOpen] = useState(false);
   const { roomsList } = useSelector((state: RootState) => state.rooms);
-  const webSocket = useContext(SocketContext);
 
   useEffect((): void => {
     dispatch(getRooms());
   }, [dispatch]);
-
-  useEffect((): void => {
-    webSocket.send(JSON.stringify({ type: 'roomsList' }));
-    webSocket.addEventListener('message', (msg) => {
-      const parsedData = JSON.parse(msg.data);
-      if (parsedData.type === 'totalOnline') dispatch(updateOnline(parsedData));
-    });
-  }, [webSocket, dispatch]);
 
   const toggleModal = (bool: boolean): void => {
     setIsOpen(bool);
