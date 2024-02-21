@@ -34,15 +34,22 @@ export default (wss: WebSocketServer): void => {
           ws.send(JSON.stringify({ type: MessageType.TotalOnline, rooms }));
           break;
         case MessageType.RoomConnection:
-          const member = await Room.findOne(
-            { roomId },
-            { members: { $elemMatch: { userId } } }
-          );
-          if (!member)
-            ws.send(JSON.stringify({ type: MessageType.ChatAnnouncement }));
+          const room = await Room.findOne({ roomId });
+          if (room && userId) {
+            const member = room.members.find(
+              (member) => member.userId === userId
+            );
+            if (!member) {
+              ws.send(
+                JSON.stringify({
+                  type: MessageType.ChatAnnouncement,
+                  text: 'Someone joined the Room',
+                })
+              );
+            }
+          }
           if (roomId && !rooms[roomId]) rooms[roomId] = [];
           if (roomId && !rooms[roomId].includes(ws)) rooms[roomId].push(ws);
-          console.log(rooms[roomId]);
           break;
         case MessageType.RoomDisconnection:
           if (rooms[roomId])

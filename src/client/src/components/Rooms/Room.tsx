@@ -11,15 +11,18 @@ import { RoomMembersList } from './RoomMembersList';
 
 export const Room: FC<RoomProps> = ({}): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
+  const { userData } = useSelector((state: RootState) => state.session);
   const { currentRoom } = useSelector((state: RootState) => state.rooms);
   const { roomId } = useParams();
   const webSocket = useContext(SocketContext);
 
   useEffect(() => {
     if (roomId) {
+      const { userId } = userData!;
       const msgData = JSON.stringify({
         type: MessageType.RoomConnection,
         roomId,
+        userId,
       });
       webSocket.send(msgData);
     }
@@ -28,6 +31,7 @@ export const Room: FC<RoomProps> = ({}): JSX.Element => {
       const msgData = JSON.parse(msg.data);
       if (msgData.type === MessageType.ChatMessage)
         dispatch(sendMessage({ ...msgData, roomId }));
+      if (msgData.type === MessageType.RoomConnection) console.log(msgData);
     });
   }, [roomId, webSocket]);
 
