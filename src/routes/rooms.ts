@@ -26,7 +26,7 @@ export default (app: Express): void => {
     if (room) {
       const promises = room.members.map(async (member) => {
         try {
-          return await User.findOne({ userId: member }).select(
+          return await User.findOne({ userId: member.userId }).select(
             '-password -__v -_id -email'
           );
         } catch (err) {
@@ -52,7 +52,7 @@ export default (app: Express): void => {
         roomName,
         password: roomPassword,
         messages: [],
-        members: [req.session && req.session.userId],
+        members: [req.session && { userId: req.session.userId }],
       });
       res.send(room);
     }
@@ -79,7 +79,7 @@ export default (app: Express): void => {
       if (req.session) {
         await Room.updateOne(
           { roomId },
-          { $addToSet: { members: req.session.userId } }
+          { $addToSet: { members: { userId: req.session.userId } } }
         );
       }
       return res.send({

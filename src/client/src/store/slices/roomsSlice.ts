@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Slices, Rooms, Room, RoomMessage } from './types';
+import { Slices, Rooms, Room, RoomMessage, UserData } from './types';
 import { createRoom } from '../thunks/createRoom';
 import { getRooms } from '../thunks/getRooms';
 import { getCurrentRoom } from '../thunks/getCurrentRoom';
@@ -21,6 +21,14 @@ const roomsSlice = createSlice({
     },
     updateOnline(state: Rooms, action: PayloadAction<any>) {
       state.roomsList = [...state.roomsList];
+    },
+    joinRoom(state: Rooms, action: PayloadAction<UserData>) {
+      if (state.currentRoom) {
+        (state.currentRoom.members as UserData[]) = [
+          ...(state.currentRoom.members as UserData[]),
+          action.payload,
+        ];
+      }
     },
   },
   extraReducers: (builder): void => {

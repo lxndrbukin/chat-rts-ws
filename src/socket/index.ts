@@ -1,6 +1,7 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { WSEvent, MessageType, UserStatus, Rooms } from './types';
 import User from '../models/User';
+import Room from '../models/Room';
 
 export default (wss: WebSocketServer): void => {
   const rooms: Rooms = {};
@@ -33,6 +34,12 @@ export default (wss: WebSocketServer): void => {
           ws.send(JSON.stringify({ type: MessageType.TotalOnline, rooms }));
           break;
         case MessageType.RoomConnection:
+          const member = await Room.findOne(
+            { roomId },
+            { members: { $elemMatch: { userId } } }
+          );
+          if (!member)
+            ws.send(JSON.stringify({ type: MessageType.ChatAnnouncement }));
           if (roomId && !rooms[roomId]) rooms[roomId] = [];
           if (roomId && !rooms[roomId].includes(ws)) rooms[roomId].push(ws);
           console.log(rooms[roomId]);
